@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import { useEffect,useState } from 'react';
 import './App.css';
 
+
+// 1. 앱이 실행되자마자 위치 기반의 날씨가 보인다
+// 2. 도시, 섭씨, 화씨, 날씨 상태 정보가 보인다
+// 3. 5개의 버튼이 있다(1개는 현재위치, 4개는 다른 도시)
+// 4. 도시 버튼을 클릭할 때마다 도시별 날씨가 나온다
+// 5. 현재 위치 기반 날씨 버튼을 클릭하면 다시 현재 위치 기반으로 돌아온다
+// 6. 데이터를 가져오는 동안 로딩 스피너가 돈다
+
 function App() {
+  
+  const getCurrentLocation=()=>{
+    navigator.geolocation.getCurrentPosition((position)=>{
+      let lat = position.coords.latitude // 위도 정보
+      let lon = position.coords.longitude // 경도 정보
+      getWeatherByCurrentLocation(lat,lon)
+    })
+  }
+
+  // api 호출
+  const getWeatherByCurrentLocation = async(lat,lon) => {
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=20c6148043e79a4941979cb598def5a0`
+    let response = await fetch(url)
+    let data = await response.json()
+    console.log("data", data)
+  }
+
+  useEffect(()=>{
+    getCurrentLocation()
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+     hi
     </div>
   );
 }
