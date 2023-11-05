@@ -1,0 +1,23 @@
+body{
+    background: url(https://nordicapis.com/wp-content/uploads/How-to-Build-an-API-Driven-Weather-App.png);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.container{
+    display: flex;
+    justify-content: center; /* 가로 가운데 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+    height: 100vh;
+    flex-direction: column;
+}
+
+.weather-box{
+    border: 3px solid white;
+    padding: 50px;
+    border-radius: 30px;
+    background-color: azure;
+    margin-bottom: 30px;
+}
