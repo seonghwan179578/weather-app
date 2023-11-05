@@ -14,6 +14,7 @@ import WeatherButton from './component/WeatherButton';
 function App() {
   
   const [weather,setWeather]=useState(null)
+  const [city,setCity]=useState('')
   const cities=['paris','new york','tokyo','seoul']
   const getCurrentLocation=()=>{
     navigator.geolocation.getCurrentPosition((position)=>{
@@ -31,15 +32,28 @@ function App() {
     setWeather(data)
   }
 
+  const getWeatherByCity=async()=>{
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=20c6148043e79a4941979cb598def5a0&units=metric`
+    let response = await fetch(url)
+    let data = await response.json()
+    setWeather(data)
+  }
+
   useEffect(()=>{
-    getCurrentLocation()
-  },[])
+    if(city == "") {
+      getCurrentLocation()
+    }else {
+      getWeatherByCity()
+    }
+  },[city])
+  
+  
 
   return (
     <div>
       <div className='container'>
      <WeatherBox weather={weather}></WeatherBox>
-     <WeatherButton cities={cities}></WeatherButton>
+     <WeatherButton cities={cities} setCity={setCity}></WeatherButton>
      </div>
     </div>
   );
