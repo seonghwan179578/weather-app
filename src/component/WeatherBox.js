@@ -6,7 +6,7 @@ const WeatherBox = ({weather}) => {
   return (
     <div className='weather-box'>
         <div>{weather?.name}</div>
-        <h2>{weather?.main.temp} / {weather?.main.temp}</h2> 
+        <h2>{weather?.main.temp}섭씨 / {weather?.main.temp}화씨로 수정 필요</h2> 
         <h3>{weather?.weather[0].description}</h3>
     </div>
   )
